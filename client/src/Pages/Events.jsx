@@ -3,7 +3,7 @@
 const Events = () => {
     return (
         <div>
-            
+            events
         </div>
     );
 };
