@@ -1,7 +1,7 @@
 import { Avatar, Button, Dropdown, Navbar, Modal } from "flowbite-react";
 import { useState } from "react";
 
-import logo from "../../public/Prafulla-ai.png";
+import logo from "../../public/Prafulla-ai white.webp";
 import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 
@@ -30,7 +30,10 @@ const Header = () => {
     );
 
   return (
-    <Navbar fluid rounded>
+    <Navbar
+      fluid
+      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-b-md"
+    >
       <Link to="/">
         <img src={logo} className="mr-3 h-12 sm:h-20" alt="Prafulla Logo" />
       </Link>
@@ -61,7 +64,7 @@ const Header = () => {
           onClick={() => setOpenModal(true)}
           outline
           gradientDuoTone="greenToBlue"
-          className="text-green-700 text-xl"
+          className="text-xl font-semibold"
         >
           Donation
         </Button>

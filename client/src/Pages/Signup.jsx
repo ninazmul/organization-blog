@@ -53,7 +53,7 @@ const Signup = () => {
             </form>
             <div>
               <p className="text-center p-2 text-sm">
-                Have an account?{" "}
+                Already have an account?{" "}
                 <Link to="/sign-in" className="underline text-blue-700">
                   Sign-In
                 </Link>
