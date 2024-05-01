@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 
 const Header = () => {
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
 
     const navBtn = (
         <ul className="md:flex md:gap-4 lg:gap-10 font-bold uppercase">

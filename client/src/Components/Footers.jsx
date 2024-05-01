@@ -12,7 +12,10 @@ import acs from "../../public/Ac logo white text.webp";
 
 const Footers = () => {
   return (
-    <Footer container className="bg-[#4c8e40] text-white">
+    <Footer
+      container
+      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] text-white"
+    >
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <Link to="/">
@@ -51,13 +54,14 @@ const Footers = () => {
             <Link to="/">Prafulla</Link>
           </p>{" "}
           <p className="flex items-center gap-2">
-            Developed by -{" "} 
-             <Link
+            Developed by -{" "}
+            <Link
               to="https://artistycode-studio.web.app"
               target="_blank"
               className="underline"
             >
-              {/* <img src={acs} alt="" className="w-12" /> */} ArtistyCode Studio
+              {/* <img src={acs} alt="" className="w-12" /> */} ArtistyCode
+              Studio
             </Link>
           </p>
         </div>
