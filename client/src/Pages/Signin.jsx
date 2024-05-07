@@ -1,16 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import prafulla from "../../public/Prafulla-ai.png";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 
 const Signin = () => {
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.email || !formData.password) {
+      return setErrorMessage("Please fill out all fields!");
+    }
+    try {
+      setLoading(true);
+      setErrorMessage(null);
+
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if (res.ok) {
+        navigate("/");
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-4">
+      <div className="flex flex-col md:flex-row-reverse gap-10 p-4">
         {/* left side  */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center md:w-1/2">
           <Link to="/">
             <img src={prafulla} alt="" className="h-28 lg:h-52" />
           </Link>
@@ -24,22 +59,31 @@ const Signin = () => {
           </p>
         </div>
         {/* right side  */}
-        <div>
-          <form className="flex flex-col gap-4 p-4 lg:p-10 bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-lg">
+        <div className="flex-1">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 p-4 lg:p-10 bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-lg"
+          >
             <h1 className="text-white text-2xl md:text-3xl lg:text-4xl font-mono text-center">
               Sign In Now!
             </h1>
             <div>
-              <Label value="Your username" className="text-white" />
-              <TextInput id="username" type="text" placeholder="Username" />
-            </div>
-            <div>
               <Label value="Your email" className="text-white" />
-              <TextInput id="email" type="text" placeholder="your@email.com" />
+              <TextInput
+                onChange={handleChange}
+                id="email"
+                type="email"
+                placeholder="your@email.com"
+              />
             </div>
             <div>
               <Label value="Your password" className="text-white" />
-              <TextInput id="password" type="password" placeholder="Password" />
+              <TextInput
+                onChange={handleChange}
+                id="password"
+                type="password"
+                placeholder="Password"
+              />
             </div>
             <Button
               outline
