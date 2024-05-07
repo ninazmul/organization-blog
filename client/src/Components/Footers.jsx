@@ -14,7 +14,7 @@ const Footers = () => {
   return (
     <Footer
       container
-      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] text-white"
+      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] text-white rounded-b-none"
     >
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">

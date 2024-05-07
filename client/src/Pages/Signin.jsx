@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import prafulla from "../../public/Prafulla-ai.png";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import { useState } from "react";
 
 const Signin = () => {
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-4">
@@ -43,18 +46,31 @@ const Signin = () => {
               gradientDuoTone="greenToBlue"
               type="submit"
               className="text-xl font-semibold"
+              disabled={loading}
             >
-              Sign Up
+              {loading ? (
+                <>
+                  <Spinner size="sm" /> <span className="pl-3">Loading...</span>
+                </>
+              ) : (
+                "Sign In"
+              )}
             </Button>
           </form>
           <div>
             <p className="text-center p-2 text-sm">
-              If you're new here, you can <Link to="/sign-up" className="underline text-blue-700">
-                              Sign-Up
+              If you're new here, you can{" "}
+              <Link to="/sign-up" className="underline text-blue-700">
+                Sign-Up
               </Link>{" "}
               for an account.
             </p>
           </div>
+          {errorMessage && (
+            <Alert className="" color="failure">
+              {errorMessage}
+            </Alert>
+          )}
         </div>
       </div>
     </div>
