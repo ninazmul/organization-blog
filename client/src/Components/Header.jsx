@@ -4,9 +4,11 @@ import { useState } from "react";
 import logo from "../../public/Prafulla-ai white.webp";
 import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const { currentUser } = useSelector(state => state.user);
 
     const navBtn = (
         <ul className="md:flex md:gap-4 lg:gap-10 font-bold uppercase">
@@ -35,36 +37,61 @@ const Header = () => {
       className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-b-md"
     >
       <Link to="/">
-        <img src={logo} className="mr-3 h-12 sm:h-20" alt="Prafulla Logo" />
+        <img src={logo} className="mr-3 h-10 sm:h-14" alt="Prafulla Logo" />
       </Link>
       <div className="flex md:order-2 gap-4">
-        <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-              rounded
-            />
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
-          </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown>
+        {currentUser ? (
+          <>
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar alt="user" img={currentUser.profilePicture} rounded />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">@{currentUser.username}</span>
+                <span className="block truncate text-sm font-medium">
+                  {currentUser.email}
+                </span>
+              </Dropdown.Header>
+              <Link to={"/dashboard?tab=profile"}>
+                <Dropdown.Item>Profile</Dropdown.Item>
+              </Link>
+              <Dropdown.Divider />
+              <Dropdown.Item>
+                <Button
+                  outline
+                  gradientDuoTone="greenToBlue"
+                  className="text-xl font-semibold w-full"
+                >
+                  Sign Out
+                </Button>
+              </Dropdown.Item>
+            </Dropdown>
+          </>
+        ) : (
+          <>
+            <Link to="/sign-up">
+              <Button
+                outline
+                gradientDuoTone="greenToBlue"
+                className="font-semibold"
+                size="sm"
+              >
+                Sign In
+              </Button>
+            </Link>
+          </>
+        )}
+
         <Navbar.Toggle />
         <Button
           onClick={() => setOpenModal(true)}
           outline
           gradientDuoTone="greenToBlue"
-          className="text-xl font-semibold"
+          className="font-semibold"
+          size="sm"
         >
           Donation
         </Button>

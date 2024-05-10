@@ -2,8 +2,8 @@
 
 const Dashboard = () => {
     return (
-        <div>
-            
+        <div className="min-h-screen">
+            dashboard
         </div>
     );
 };
