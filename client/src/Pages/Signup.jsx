@@ -56,7 +56,7 @@ const Signup = () => {
               Join Us Today!
             </h1>
 
-            <p className="text-gray-500 text-justify">
+            <p className=" text-justify">
               Sign up now to connect, discover, and contribute to our community.
               It only takes a moment!
             </p>

@@ -59,7 +59,7 @@ const Signin = () => {
             Welcome Back!
           </h1>
 
-          <p className="text-gray-500 text-justify">
+          <p className="text-justify">
             Sign in to access your account and dive back into our community.
             Let's continue the journey together.
           </p>

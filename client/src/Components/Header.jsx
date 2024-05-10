@@ -1,14 +1,17 @@
 import { Avatar, Button, Dropdown, Navbar, Modal } from "flowbite-react";
 import { useState } from "react";
-
 import logo from "../../public/Prafulla-ai white.webp";
 import { Link } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const Header = () => {
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   const { currentUser } = useSelector(state => state.user);
+  const { theme } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
 
     const navBtn = (
         <ul className="md:flex md:gap-4 lg:gap-10 font-bold uppercase">
@@ -40,6 +43,14 @@ const Header = () => {
         <img src={logo} className="mr-3 h-10 sm:h-14" alt="Prafulla Logo" />
       </Link>
       <div className="flex md:order-2 gap-4">
+        <Button
+          className="hidden sm:inline"
+          color="none"
+          pill
+          onClick={() => dispatch(toggleTheme())} rounded
+        >
+          {theme === "light" ? <FaSun size={24}/> : <FaMoon size={24}/>}
+        </Button>
         {currentUser ? (
           <>
             <Dropdown
@@ -86,7 +97,7 @@ const Header = () => {
         )}
 
         <Navbar.Toggle />
-        <Button
+        {/* <Button
           onClick={() => setOpenModal(true)}
           outline
           gradientDuoTone="greenToBlue"
@@ -115,7 +126,7 @@ const Header = () => {
               Close
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
       </div>
       <Navbar.Collapse>{navBtn}</Navbar.Collapse>
     </Navbar>

@@ -2,7 +2,7 @@
 
 const Media = () => {
     return (
-        <div>
+        <div className="min-h-screen">
             media
         </div>
     );

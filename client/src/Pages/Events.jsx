@@ -2,7 +2,7 @@
 
 const Events = () => {
     return (
-        <div>
+        <div className="min-h-screen">
             events
         </div>
     );
