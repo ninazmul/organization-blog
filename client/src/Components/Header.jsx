@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <Navbar
       fluid
-      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-b-md"
+      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-none"
     >
       <Link to="/">
         <img src={logo} className="mr-3 h-10 sm:h-14" alt="Prafulla Logo" />
