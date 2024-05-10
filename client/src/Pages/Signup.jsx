@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import prafulla from "../../public/Prafulla-ai.png";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
+import OAuth from "../Components/OAuth";
 
 const Signup = () => {
 
@@ -111,6 +112,7 @@ const Signup = () => {
                   "Sign Up"
                 )}
               </Button>
+              <OAuth/>
             </form>
             <div>
               <p className="text-center pt-2 text-sm">
