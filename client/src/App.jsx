@@ -9,11 +9,12 @@ import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
 import Header from "./Components/Header";
 import Footers from "./Components/Footers";
+import PrivetRoute from "./Components/PrivetRoute";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
@@ -21,9 +22,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<PrivetRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
-      <Footers/>
+      <Footers />
     </BrowserRouter>
   );
 }

@@ -44,7 +44,7 @@ const Header = () => {
       </Link>
       <div className="flex md:order-2 gap-4">
         <Button
-          className="hidden sm:inline"
+          className=""
           color="none"
           pill
           onClick={() => dispatch(toggleTheme())} rounded
@@ -83,7 +83,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to="/sign-up">
+            <Link to="/sign-in">
               <Button
                 outline
                 gradientDuoTone="greenToBlue"

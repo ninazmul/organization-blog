@@ -5,7 +5,7 @@ const ThemeProvider = ({children}) => {
 
     return (
         <div className={theme}>
-            <div className='bg-white text-gray-700 dark:text-green-200 dark:bg-[rgb(8,4,23)] min-h-screen'>
+            <div className='bg-white text-green-900 dark:text-green-200 dark:bg-[rgb(8,4,23)] min-h-screen'>
                 {children}
             </div>
         </div>
