@@ -6,12 +6,29 @@ import ActiveLink from "./ActiveLink";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { signOutSuccess } from "../redux/user/userSlice";
 
 const Header = () => {
   // const [openModal, setOpenModal] = useState(false);
   const { currentUser } = useSelector(state => state.user);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
     const navBtn = (
         <ul className="md:flex md:gap-4 lg:gap-10 font-bold uppercase">
@@ -47,9 +64,10 @@ const Header = () => {
           className=""
           color="none"
           pill
-          onClick={() => dispatch(toggleTheme())} rounded
+          onClick={() => dispatch(toggleTheme())}
+          rounded
         >
-          {theme === "light" ? <FaSun size={24}/> : <FaMoon size={24}/>}
+          {theme === "light" ? <FaSun size={24} /> : <FaMoon size={24} />}
         </Button>
         {currentUser ? (
           <>
@@ -72,6 +90,7 @@ const Header = () => {
               <Dropdown.Divider />
               <Dropdown.Item>
                 <Button
+                  onClick={handleSignout}
                   outline
                   gradientDuoTone="greenToBlue"
                   className="text-xl font-semibold w-full"
