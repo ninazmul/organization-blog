@@ -10,6 +10,8 @@ import Dashboard from "./Pages/Dashboard";
 import Header from "./Components/Header";
 import Footers from "./Components/Footers";
 import PrivetRoute from "./Components/PrivetRoute";
+import AdminPrivateRoute from "./Components/AdminPrivateRoute";
+import CreatePost from "./Pages/CreatePost";
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
         <Route path="/sign-up" element={<Signup />} />
         <Route element={<PrivetRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<AdminPrivateRoute />}>
+          <Route path="/create-post" element={<CreatePost />} />
         </Route>
       </Routes>
       <Footers />

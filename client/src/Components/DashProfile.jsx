@@ -9,10 +9,11 @@ import "react-circular-progressbar/dist/styles.css";
 import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import {Link}from "react-router-dom"
 
 
 export default function DashProfile() {
-    const { currentUser, error } = useSelector(state => state.user);
+    const { currentUser, error, loading } = useSelector(state => state.user);
     const [imageFile, setImageFile] = useState(null);
     const [imageFileUrl, setImageFileUrl] = useState(null);
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -224,9 +225,20 @@ export default function DashProfile() {
           gradientDuoTone="greenToBlue"
           type="submit"
           className="text-xl font-semibold"
+          disabled={loading || imageFileUploading}
         >
-          Update
+          {loading ? "Loading..." : "Update"}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={"/create-post"}>
+            <Button
+              gradientDuoTone="greenToBlue"
+              className="text-xl font-semibold w-full"
+            >
+              Create a Post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="flex justify-between text-red-500 my-4">
         <Button
@@ -236,7 +248,11 @@ export default function DashProfile() {
         >
           Delete Account
         </Button>
-        <Button onClick={handleSignout} className="text-red-500 font-semibold" color="none">
+        <Button
+          onClick={handleSignout}
+          className="text-red-500 font-semibold"
+          color="none"
+        >
           Sign Out
         </Button>
       </div>
