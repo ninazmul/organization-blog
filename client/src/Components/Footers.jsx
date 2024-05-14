@@ -13,7 +13,7 @@ const Footers = () => {
   return (
     <Footer
       container
-      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] text-white rounded-none"
+      className="bg-gradient-to-r from-[#4c8e40] to-[#81b619] text-green-900 dark:text-green-200 rounded-none"
     >
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
@@ -22,24 +22,24 @@ const Footers = () => {
           </Link>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div>
-              <Footer.Title title="Organization" className="text-white" />
-              <Footer.LinkGroup col className="text-white">
+              <Footer.Title title="Organization" className="text-green-900 dark:text-green-200" />
+              <Footer.LinkGroup col className="text-green-900 dark:text-green-200">
                 <Link to="/events">Events</Link>
                 <Link to="/media">Media</Link>
                 <Link to="/about">About Us</Link>
               </Footer.LinkGroup>
             </div>
             <div>
-              <Footer.Title title="Follow us" className="text-white" />
-              <Footer.LinkGroup col className="text-white">
+              <Footer.Title title="Follow us" className="text-green-900 dark:text-green-200" />
+              <Footer.LinkGroup col className="text-green-900 dark:text-green-200">
                 <Footer.Link href="#">Facebook</Footer.Link>
                 <Footer.Link href="#">Instagram</Footer.Link>
                 <Footer.Link href="#">YouTube</Footer.Link>
               </Footer.LinkGroup>
             </div>
             <div>
-              <Footer.Title title="Legal" className="text-white" />
-              <Footer.LinkGroup col className="text-white">
+              <Footer.Title title="Legal" className="text-green-900 dark:text-green-200" />
+              <Footer.LinkGroup col className="text-green-900 dark:text-green-200">
                 <Footer.Link href="#">Privacy Policy</Footer.Link>
                 <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
               </Footer.LinkGroup>
