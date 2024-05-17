@@ -13,6 +13,7 @@ import PrivetRoute from "./Components/PrivetRoute";
 import AdminPrivateRoute from "./Components/AdminPrivateRoute";
 import CreatePost from "./Pages/CreatePost";
 import UpdatePost from "./Pages/UpdatePost";
+import PostPage from "./Pages/PostPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
+        <Route path="/post/:postSlug" element={<PostPage />} />
         <Route element={<PrivetRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
