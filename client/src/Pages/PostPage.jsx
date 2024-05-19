@@ -1,6 +1,7 @@
 import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
+import CallToAction from "../Components/CallToAction";
 
 
 export default function PostPage() {
@@ -47,14 +48,24 @@ export default function PostPage() {
           {post && post.category}
         </Button>
       </Link>
-          <img src={post && post.image} alt={post && post.title} className="mt-10 max-h-[600px] w-full object-cover bg-gray-500" />
-          <div className="flex justify-between items-center p-4 border-b border-green-900 mx-auto w-full text-xs ">
-              <p>{post && new Date(post.createdAt).toLocaleDateString()}</p>
-              <p className="italic">{post && (post.content.length / 1000).toFixed(0)} mins read</p>
-          </div>
-          <div className="p-3 mx-auto w-full post-content text-justify" dangerouslySetInnerHTML={{__html: post && post.content}}>
-              
-          </div>
+      <img
+        src={post && post.image}
+        alt={post && post.title}
+        className="mt-10 max-h-[600px] w-full object-cover bg-gray-500"
+      />
+      <div className="flex justify-between items-center p-4 border-b border-green-900 mx-auto w-full text-xs ">
+        <p>{post && new Date(post.createdAt).toLocaleDateString()}</p>
+        <p className="italic">
+          {post && (post.content.length / 1000).toFixed(0)} mins read
+        </p>
+      </div>
+      <div
+        className="p-3 mx-auto overflow-x-auto w-full post-content text-justify"
+        dangerouslySetInnerHTML={{ __html: post && post.content }}
+      ></div>
+      <div className="max-w-4xl mx-auto w-full">
+        <CallToAction />
+      </div>
     </main>
   );
 }

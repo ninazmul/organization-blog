@@ -99,6 +99,7 @@ export default function CreatePost() {
             <option value="uncategorized">Select a category</option>
             <option value="event">Event</option>
             <option value="media">Media</option>
+            <option value="banner">Banner</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-green-700 border-dotted p-3">

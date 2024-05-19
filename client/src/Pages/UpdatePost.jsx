@@ -106,7 +106,9 @@ export default function UpdatePost() {
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
-      <h1 className="text-center text-3xl my-7 font-semibold">Update this Post</h1>
+      <h1 className="text-center text-3xl my-7 font-semibold">
+        Update this Post
+      </h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <TextInput
@@ -118,17 +120,18 @@ export default function UpdatePost() {
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-                      value={formData.title}
+            value={formData.title}
           />
           <Select
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
             }
-                      value={formData.category}
+            value={formData.category}
           >
             <option value="uncategorized">Select a category</option>
             <option value="event">Event</option>
             <option value="media">Media</option>
+            <option value="banner">Banner</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-green-700 border-dotted p-3">
@@ -170,8 +173,8 @@ export default function UpdatePost() {
           placeholder="Write something..."
           className="h-72 mb-12"
           required
-                  onChange={(value) => setFormData({ ...formData, content: value })}
-                  value={formData.content}
+          onChange={(value) => setFormData({ ...formData, content: value })}
+          value={formData.content}
         />
         <Button gradientDuoTone="greenToBlue" type="submit">
           Update
