@@ -66,7 +66,7 @@ export default function CommentSection({ postId }) {
       });
       if (res.ok) {
         const data = await res.json();
-        setComments(comments.map((comment) => 
+        setComments(comments.map((comment) =>
           comment._id === commentId ? {
             ...comment,
             likes: data.likes,
@@ -77,7 +77,35 @@ export default function CommentSection({ postId }) {
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
+
+  const handleEdit = async (comment, editedContent) => {
+    try {
+      const res = await fetch(`/api/comment/editComment/${comment._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: editedContent,
+        }),
+      });
+
+      if (res.ok) {
+        const updatedComment = await res.json();
+        setComments((prevComments) =>
+          prevComments.map((c) =>
+            c._id === comment._id
+              ? { ...c, content: updatedComment.content }
+              : c
+          )
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="p-3 mx-auto w-full">
       {currentUser ? (
@@ -159,6 +187,7 @@ export default function CommentSection({ postId }) {
                 key={comment._id}
                 comment={comment}
                 onLike={handleLike}
+                onEdit={handleEdit}
               />
             ))}
           </div>
