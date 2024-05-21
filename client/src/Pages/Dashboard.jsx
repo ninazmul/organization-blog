@@ -5,6 +5,7 @@ import DashProfile from "../Components/DashProfile";
 import DashPost from "../Components/DashPost";
 import DashUsers from "../Components/DashUsers";
 import DashComment from "../Components/DashComment";
+import DashboardComponent from "../Components/DashboardComponent";
 
 
 const Dashboard = () => {
@@ -27,6 +28,8 @@ const Dashboard = () => {
         </div>
         {/* data  */}
         <div className="flex-1">
+          {/* dashboard Components */}
+          {tab === "dash" && <DashboardComponent />}
           {/* profile */}
           {tab === "profile" && <DashProfile />}
           {/* post */}
