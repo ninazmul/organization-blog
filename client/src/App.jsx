@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
-import Media from "./Pages/Media";
 import About from "./Pages/About";
 import Signin from "./Pages/Signin";
 import Signup from "./Pages/Signup";
@@ -15,19 +14,20 @@ import CreatePost from "./Pages/CreatePost";
 import UpdatePost from "./Pages/UpdatePost";
 import PostPage from "./Pages/PostPage";
 import ScrollToTop from "./Components/ScrollToTop";
+import Search from "./Pages/Search";
 
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/media" element={<Media />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/post/:postSlug" element={<PostPage />} />
         <Route element={<PrivetRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />

@@ -2,54 +2,101 @@ import { Link } from "react-router-dom";
 import CallToAction from "../Components/CallToAction";
 import { useEffect, useState } from "react";
 import PostCard from "../Components/PostCard";
-
+import { Button, Modal } from "flowbite-react";
+import Banner from "../Components/Banner";
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const res = await fetch("/api/post/getposts");
-            const data = await res.json();
-            setPosts(data.posts);
-        }
-        fetchPosts();
-    }, []);
-    return (
-      <div className="min-h-screen">
-        <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold lg:text-6xl font-serif">
-            Welcome to Prafulla
-          </h1>
-          <p className="text-gray-500 text-xs sm:text-sm">
-            May the world winsome, Joyful and Blooming
-          </p>
-          <Link
-            to="/search"
-            className="text-xs sm:text-sm text-teal-500 font-bold hover:underline"
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch("/api/post/getposts");
+        const data = await res.json();
+        // Filter posts to show only those in the "event" category
+        const eventPosts = data.posts.filter(
+          (post) => post.category === "event"
+        );
+        // Limit to the first 9 posts
+        setPosts(eventPosts.slice(0, 9));
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  return (
+    <div className="min-h-screen">
+      <div className="">
+        <Banner />
+        {/* <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto z-10 top-0 text-white">
+          
+          <Button
+            onClick={() => setOpenModal(true)}
+            outline
+            gradientDuoTone="greenToBlue"
+            className="font-semibold"
           >
-            View all events
-          </Link>
-        </div>
-
-        <div className="p-3 bg-amber-100 dark:bg-slate-700">
-          <CallToAction />
-            </div>
-            <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
-                {
-                    posts && posts.length > 0 && (<div className="flex flex-col gap-6">
-                        <h2 className="text-2xl font-semibold text-center">Recent Posts</h2>
-                        <div className="flex flex-wrap gap-4 justify-center">
-                            {
-                                posts.map((post)=> (<PostCard key={post._id} post={post}/>))
-                            }
-                        </div>
-                        <Link to={"/search"} className="text-lg text-teal-500 hover:underline text-center">View all posts</Link>
-                    </div>)
-            }
-            </div>
+            Donation
+          </Button>
+          <Modal
+            dismissible
+            show={openModal}
+            onClose={() => setOpenModal(false)}
+          >
+            <Modal.Header>Support Our Cause</Modal.Header>
+            <Modal.Body>
+              <div className="space-y-6">
+                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  Dear Friend, We're so glad you've taken a step to make a
+                  difference! Your generous donation will help us continue our
+                  work and make a significant impact in the lives of those we
+                  serve.
+                </p>
+                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  Thank you for your generosity and support!
+                </p>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={() => setOpenModal(false)} color="failure">
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </div> */}
       </div>
-    );
+
+      <div className="p-3 bg-amber-100 dark:bg-slate-700">
+        <CallToAction />
+      </div>
+
+      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
+        {posts && posts.length > 0 && (
+          <div className="flex flex-col gap-6">
+            <h2 className="text-2xl font-semibold text-center">
+              Recent Event Posts
+            </h2>
+            <div className="flex flex-wrap gap-4 justify-center">
+              {posts.map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))}
+            </div>
+            {posts.length === 9 && (
+              <Link
+                to="/search"
+                className="text-lg text-teal-500 hover:underline text-center"
+              >
+                View all posts
+              </Link>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Home;

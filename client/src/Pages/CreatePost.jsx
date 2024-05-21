@@ -98,7 +98,6 @@ export default function CreatePost() {
           >
             <option value="uncategorized">Select a category</option>
             <option value="event">Event</option>
-            <option value="media">Media</option>
             <option value="banner">Banner</option>
           </Select>
         </div>

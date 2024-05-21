@@ -1,9 +1,10 @@
-import { Button, Spinner } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CallToAction from "../Components/CallToAction";
 import CommentSection from "../Components/CommentSection";
 import PostCard from "../Components/PostCard";
+import Loading from "../Components/Loading";
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -51,9 +52,7 @@ export default function PostPage() {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Spinner size="xl" color="success" />
-      </div>
+      <Loading/>
     );
 
   return (

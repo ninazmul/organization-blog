@@ -1,18 +1,32 @@
-import { Avatar, Button, Dropdown, Navbar, Modal } from "flowbite-react";
-import { useState } from "react";
+import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
+import { useEffect, useState } from "react";
 import logo from "../../public/Prafulla-ai white.webp";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ActiveLink from "./ActiveLink";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { signOutSuccess } from "../redux/user/userSlice";
+import { AiOutlineSearch } from "react-icons/ai";
+
 
 const Header = () => {
-  // const [openModal, setOpenModal] = useState(false);
+  
   const { currentUser } = useSelector(state => state.user);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const path = useLocation().pathname;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
 
   const handleSignout = async () => {
     try {
@@ -41,15 +55,19 @@ const Header = () => {
           <li>Events</li>
         </ActiveLink>
 
-        <ActiveLink spy="true" smooth="true" to="/media">
-          <li>Media</li>
-        </ActiveLink>
-
         <ActiveLink spy="true" smooth="true" to="/about">
           <li>About Us</li>
         </ActiveLink>
       </ul>
     );
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  }
 
   return (
     <Navbar
@@ -59,6 +77,16 @@ const Header = () => {
       <Link to="/">
         <img src={logo} className="mr-3 h-10 sm:h-14" alt="Prafulla Logo" />
       </Link>
+      <form onSubmit={handleSubmit}>
+        <TextInput
+          type="text"
+          placeholder="Search..."
+          rightIcon={AiOutlineSearch}
+          className="hidden lg:inline"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </form>
       <div className="flex md:order-2 gap-4">
         <Button
           className=""
@@ -84,6 +112,15 @@ const Header = () => {
                   {currentUser.email}
                 </span>
               </Dropdown.Header>
+              {currentUser.isAdmin && (
+                <Link to="/dashboard?tab=dash">
+                  <Dropdown.Item
+                    as="div"
+                  >
+                    Dashboard
+                  </Dropdown.Item>
+                </Link>
+              )}
               <Link to={"/dashboard?tab=profile"}>
                 <Dropdown.Item>Profile</Dropdown.Item>
               </Link>
@@ -116,36 +153,7 @@ const Header = () => {
         )}
 
         <Navbar.Toggle />
-        {/* <Button
-          onClick={() => setOpenModal(true)}
-          outline
-          gradientDuoTone="greenToBlue"
-          className="font-semibold"
-          size="sm"
-        >
-          Donation
-        </Button>
-        <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
-          <Modal.Header>Support Our Cause</Modal.Header>
-          <Modal.Body>
-            <div className="space-y-6">
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Dear Friend, We're so glad you've taken a step to make a
-                difference! Your generous donation will help us continue our
-                work and make a significant impact in the lives of those we
-                serve.
-              </p>
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Thank you for your generosity and support!
-              </p>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setOpenModal(false)} color="failure">
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal> */}
+        
       </div>
       <Navbar.Collapse>{navBtn}</Navbar.Collapse>
     </Navbar>
