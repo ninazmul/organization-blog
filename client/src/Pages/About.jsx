@@ -213,7 +213,7 @@ const About = () => {
             events:
           </p>
           <ul className="list-disc pl-6 space-y-2 text-lg ">
-            <li>Facebook: facebook.com/prafulla</li>
+            <li>Facebook: https://www.facebook.com/Prafulla.bd</li>
             <li>Twitter: twitter.com/prafulla</li>
             <li>Instagram: instagram.com/prafulla</li>
           </ul>

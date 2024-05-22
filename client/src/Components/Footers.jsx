@@ -38,9 +38,15 @@ const Footers = () => {
                 className="text-white dark:text-green-200"
               />
               <Footer.LinkGroup col className="text-white dark:text-green-200">
-                <Footer.Link href="#">Facebook</Footer.Link>
-                <Footer.Link href="#">Instagram</Footer.Link>
-                <Footer.Link href="#">YouTube</Footer.Link>
+                <Link to="https://www.facebook.com/Prafulla.bd" target="_blank">
+                  Facebook
+                </Link>
+                <Link to="" target="_blank">
+                  Instagram
+                </Link>
+                <Link to="" target="_blank">
+                  YouTube
+                </Link>
               </Footer.LinkGroup>
             </div>
             <div>
