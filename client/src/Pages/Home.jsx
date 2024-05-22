@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import CallToAction from "../Components/CallToAction";
 import { useEffect, useState } from "react";
 import PostCard from "../Components/PostCard";
-import { Button, Modal } from "flowbite-react";
 import Banner from "../Components/Banner";
+import Committee from "../Components/Committee";
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
-    const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -68,7 +67,7 @@ const Home = () => {
           </Modal>
         </div> */}
       </div>
-
+        <Committee/>
       <div className="p-3 bg-amber-100 dark:bg-slate-700">
         <CallToAction />
       </div>

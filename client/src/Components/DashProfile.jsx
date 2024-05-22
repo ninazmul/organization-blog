@@ -1,105 +1,121 @@
-import { Alert, Button, Modal, TextInput } from "flowbite-react";
+import {
+  Alert,
+  Button,
+  Modal,
+  TextInput,
+  Textarea,
+  Select,
+} from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { app } from "../firebase";
-
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOutSuccess } from "../redux/user/userSlice";
-import { useDispatch } from "react-redux";
+import {
+  updateStart,
+  updateSuccess,
+  updateFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
+  signOutSuccess,
+} from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import {Link}from "react-router-dom"
-
+import { Link } from "react-router-dom";
 
 export default function DashProfile() {
-    const { currentUser, error, loading } = useSelector(state => state.user);
-    const [imageFile, setImageFile] = useState(null);
-    const [imageFileUrl, setImageFileUrl] = useState(null);
-    const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
-    const [imageFileUploadError, setImageFileUploadError] = useState(null);
-    const [imageFileUploading, setImageFileUploading] = useState(false);
-    const [formData, setFormData] = useState({});
-    const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
-    const [updateUserError, setUpdateUserError] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileUrl, setImageFileUrl] = useState(null);
+  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
+  const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploading, setImageFileUploading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+  const [updateUserError, setUpdateUserError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-    const filePickerRef = useRef();
-    const dispatch = useDispatch();
+  const filePickerRef = useRef();
+  const dispatch = useDispatch();
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setImageFile(file);
-            setImageFileUrl(URL.createObjectURL(file));
-        }
-    };
-    useEffect(() => {
-        if (imageFile) {
-            uploadImage()
-        }
-    }, [imageFile]);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setImageFileUrl(URL.createObjectURL(file));
+    }
+  };
+  useEffect(() => {
+    if (imageFile) {
+      uploadImage();
+    }
+  }, [imageFile]);
 
-    const uploadImage = async () => {
-        
-        //   allow read;
-        //   allow write: if
-        //   request.resource.size < 2 * 1024 * 1024 &&
-      //   request.resource.contentType.matches('image/.*')
-        setImageFileUploading(true);
-        setImageFileUploadError(null);
-        const storage = getStorage(app);
-        const fileName = new Date().getTime() + imageFile.name;
-        const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef, imageFile);
-        uploadTask.on(
-            'state_changed',
-            (snapshot) => {
-                const progress =
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                setImageFileUploadProgress(progress.toFixed(0));
-            },
-            (error) => {
-                setImageFileUploadError('Could not upload image (File must be less than 2MB & it must a Image file)');
-                setImageFileUploadProgress(null);
-                setImageFile(null);
-                setImageFileUrl(null);
-                setImageFileUploading(false);
-            },
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                  setImageFileUrl(downloadURL);
-                  setFormData({ ...formData, profilePicture: downloadURL });
-                  setImageFileUploading(false);
-                });
-            }
-        )
-    };
-  
+  const uploadImage = async () => {
+    setImageFileUploading(true);
+    setImageFileUploadError(null);
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + imageFile.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setImageFileUploadProgress(progress.toFixed(0));
+      },
+      (error) => {
+        setImageFileUploadError(
+          "Could not upload image (File must be less than 2MB & it must be an image file)"
+        );
+        setImageFileUploadProgress(null);
+        setImageFile(null);
+        setImageFileUrl(null);
+        setImageFileUploading(false);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImageFileUrl(downloadURL);
+          setFormData({ ...formData, profilePicture: downloadURL });
+          setImageFileUploading(false);
+        });
+      }
+    );
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  console.log(formData)
+  const handleSelectChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
     if (Object.keys(formData).length === 0) {
-      setUpdateUserError('No changes made');
+      setUpdateUserError("No changes made");
       return;
     }
     if (imageFileUploading) {
-      setUpdateUserError('Please wait for image to upload');
+      setUpdateUserError("Please wait for image to upload");
       return;
     }
     try {
       dispatch(updateStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -122,7 +138,7 @@ export default function DashProfile() {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await res.json();
       if (!res.ok) {
@@ -133,12 +149,12 @@ export default function DashProfile() {
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
     }
-  }
+  };
 
   const handleSignout = async () => {
     try {
-      const res = await fetch('/api/user/signout', {
-        method: 'POST',
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
       });
       const data = await res.json();
       if (!res.ok) {
@@ -150,7 +166,6 @@ export default function DashProfile() {
       console.log(error.message);
     }
   };
-
 
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
@@ -202,22 +217,110 @@ export default function DashProfile() {
         <TextInput
           type="text"
           id="username"
-          placeholder="username"
+          placeholder="Username"
           defaultValue={currentUser.username}
           onChange={handleChange}
         />
         <TextInput
           type="email"
           id="email"
-          placeholder="example@email.com"
+          placeholder="Email Address"
           defaultValue={currentUser.email}
           onChange={handleChange}
         />
         <TextInput
           type="password"
           id="password"
-          placeholder="password"
-          defaultValue={currentUser.password}
+          placeholder="Password"
+          onChange={handleChange}
+        />
+        <label className="text-xl font-semibold text-center">
+          To become a volunteer, please complete your profile.
+        </label>
+        <TextInput
+          type="text"
+          id="name"
+          placeholder="Your Name"
+          defaultValue={currentUser.name}
+          onChange={handleChange}
+        />
+        <TextInput
+          type="number"
+          id="number"
+          placeholder="Phone Number"
+          defaultValue={currentUser.number}
+          onChange={handleChange}
+        />
+        <div className="flex flex-wrap gap-4 justify-between">
+          <TextInput
+            type="number"
+            id="age"
+            placeholder="Age"
+            defaultValue={currentUser.age}
+            onChange={handleChange}
+          />
+          <Select
+            id="bloodGroup"
+            value={currentUser.bloodGroup}
+            onChange={handleSelectChange}
+          >
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </Select>
+        </div>
+        <TextInput
+          type="text"
+          id="address"
+          placeholder="Address"
+          defaultValue={currentUser.address}
+          onChange={handleChange}
+        />
+        <Select
+          id="education"
+          value={currentUser.education}
+          onChange={handleSelectChange}
+        >
+          <option value="">Select Education Level</option>
+          <option value="High School">Secondary School Certificate</option>
+          <option value="Associate Degree">Higher Secondary Certificate</option>
+          <option value="Bachelor's Degree">Bachelor's Degree</option>
+          <option value="Master's Degree">Master's Degree</option>
+          <option value="Doctorate">Doctorate</option>
+        </Select>
+        <TextInput
+          type="text"
+          id="facebook"
+          placeholder="Facebook Profile URL"
+          defaultValue={currentUser.facebook}
+          onChange={handleChange}
+        />
+        <TextInput
+          type="text"
+          id="linkedIn"
+          placeholder="LinkedIn Profile URL"
+          defaultValue={currentUser.linkedIn}
+          onChange={handleChange}
+        />
+        <TextInput
+          type="text"
+          id="website"
+          placeholder="Website/Portfolio URL"
+          defaultValue={currentUser.website}
+          onChange={handleChange}
+        />
+        <Textarea
+          type="text"
+          id="sdg"
+          placeholder="Your Thoughts on SDG Goals"
+          rows="3"
+          defaultValue={currentUser.sdg}
           onChange={handleChange}
         />
         <Button
@@ -227,7 +330,7 @@ export default function DashProfile() {
           className="text-xl font-semibold"
           disabled={loading || imageFileUploading}
         >
-          {loading ? "Loading..." : "Update"}
+          {loading ? "Loading..." : "Update Profile"}
         </Button>
         {currentUser.isAdmin && (
           <Link to={"/create-post"}>
