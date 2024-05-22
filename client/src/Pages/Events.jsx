@@ -22,7 +22,7 @@ const Events = () => {
     }, []);
     return (
       <div className="min-h-screen">
-        <h1 className="text-3xl font-semibold p-3 mt-5 text-center">
+        <h1 className="text-2xl lg:text-3xl mt-5 font-semibold font-serif text-center pb-4">
           All Events:
         </h1>
         <div className="flex flex-wrap gap-4 justify-center">

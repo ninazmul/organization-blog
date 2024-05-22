@@ -142,7 +142,9 @@ export default function DashUsers() {
   return (
     <div>
       <div>
-        <h1 className="text-center my-4 font-semibold text-3xl">All Users</h1>
+        <h1 className="text-2xl lg:text-3xl mt-5 font-semibold font-serif text-center pb-4">
+          All Users
+        </h1>
         <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-[#81b619] scrollbar-thumb-green-900 dark:scrollbar-track-[#4c8e40] dark:scrollbar-thumb-green-200">
           {currentUser.isAdmin && users.length > 0 ? (
             <>
@@ -245,7 +247,7 @@ export default function DashUsers() {
         </div>
       </div>
       <div>
-        <h1 className="text-center my-4 font-semibold text-3xl">
+        <h1 className="text-2xl lg:text-3xl mt-5 font-semibold font-serif text-center pb-4">
           All volunteers
         </h1>
         <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-[#81b619] scrollbar-thumb-green-900 dark:scrollbar-track-[#4c8e40] dark:scrollbar-thumb-green-200">
@@ -257,6 +259,7 @@ export default function DashUsers() {
                   <Table.HeadCell>User Image</Table.HeadCell>
                   <Table.HeadCell>User Name</Table.HeadCell>
                   <Table.HeadCell>User Email</Table.HeadCell>
+                  <Table.HeadCell>Mobile Number</Table.HeadCell>
                   <Table.HeadCell>volunteer</Table.HeadCell>
                   <Table.HeadCell>Designation</Table.HeadCell>
                   <Table.HeadCell>Delete</Table.HeadCell>
@@ -274,8 +277,9 @@ export default function DashUsers() {
                           className="w-10 h-10 object-cover rounded-full bg-gray-500"
                         />
                       </Table.Cell>
-                      <Table.Cell>{user.username}</Table.Cell>
+                      <Table.Cell>{user.name}</Table.Cell>
                       <Table.Cell>{user.email}</Table.Cell>
+                      <Table.Cell>{user.number}</Table.Cell>
                       <Table.Cell>
                         <Button
                           outline

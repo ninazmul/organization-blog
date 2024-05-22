@@ -15,6 +15,8 @@ import UpdatePost from "./Pages/UpdatePost";
 import PostPage from "./Pages/PostPage";
 import ScrollToTop from "./Components/ScrollToTop";
 import Search from "./Pages/Search";
+import TermsAndConditions from "./Pages/TermsAndConditions";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/search" element={<Search />} />
         <Route path="/post/:postSlug" element={<PostPage />} />
+        <Route path="/termsAndConditions" element={<TermsAndConditions />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
         <Route element={<PrivetRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>

@@ -49,8 +49,8 @@ const Footers = () => {
                 className="text-white dark:text-green-200"
               />
               <Footer.LinkGroup col className="text-white dark:text-green-200">
-                <Footer.Link href="#">Privacy Policy</Footer.Link>
-                <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
+                <Link to="/privacyPolicy">Privacy Policy</Link>
+                <Link to="/termsAndConditions">Terms &amp; Conditions</Link>
               </Footer.LinkGroup>
             </div>
           </div>

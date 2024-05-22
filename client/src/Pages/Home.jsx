@@ -67,7 +67,7 @@ const Home = () => {
           </Modal>
         </div> */}
       </div>
-        <Committee/>
+      <Committee />
       <div className="p-3 bg-amber-100 dark:bg-slate-700">
         <CallToAction />
       </div>
@@ -75,7 +75,7 @@ const Home = () => {
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
         {posts && posts.length > 0 && (
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-semibold text-center">
+            <h2 className="text-2xl lg:text-3xl font-semibold font-serif text-center pb-4">
               Recent Event Posts
             </h2>
             <div className="flex flex-wrap gap-4 justify-center">
