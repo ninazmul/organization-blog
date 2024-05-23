@@ -4,13 +4,17 @@ import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 import OAuth from "../Components/OAuth";
 
 const Signin = () => {
   const [formData, setFormData] = useState({});
 
-  const { loading, error: errorMessage } = useSelector(state => state.user);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -37,7 +41,7 @@ const Signin = () => {
       if (data.success === false) {
         dispatch(signInFailure(data.message));
       }
-      
+
       if (res.ok) {
         dispatch(signInSuccess(data));
         navigate("/");
@@ -106,7 +110,7 @@ const Signin = () => {
                 "Sign In"
               )}
             </Button>
-            <OAuth/>
+            <OAuth />
           </form>
           <div>
             <p className="text-center p-2 text-sm">

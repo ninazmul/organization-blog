@@ -23,21 +23,18 @@ export default function Banner() {
 
   return (
     <div>
-      <div className="h-56 md:h-80 lg:h-96 relative rounded-none">
+      <div className="h-56 md:h-80 lg:h-96 relative">
         <Carousel pauseOnHover>
           {posts.length > 0 ? (
             posts.map((post) => (
-              <div
-                key={post._id}
-                className="relative w-full h-full rounded-none"
-              >
+              <div key={post._id} className="relative w-full h-full">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="object-cover w-full h-full rounded-none"
+                  className="object-cover w-full h-full"
                 />
-                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-none"></div>
-                <div className="absolute z-10 top-1/3 w-full text-center px-4 rounded-none">
+                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+                <div className="absolute z-10 top-1/3 w-full text-center px-4">
                   <h1 className="text-3xl font-bold lg:text-6xl font-serif text-white">
                     {post.title}
                   </h1>
@@ -48,14 +45,14 @@ export default function Banner() {
               </div>
             ))
           ) : (
-            <div className="relative w-full h-full rounded-none">
+            <div className="relative w-full h-full">
               <img
                 src={logo}
                 alt="default"
-                className="object-cover w-full h-full rounded-none"
+                className="object-cover w-full h-full"
               />
-              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-none"></div>
-              <div className="absolute z-10 top-1/3 w-full text-center px-4 rounded-none">
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+              <div className="absolute z-10 top-1/3 w-full text-center px-4">
                 <h1 className="text-3xl font-bold lg:text-6xl font-serif text-white">
                   Welcome to Prafulla
                 </h1>

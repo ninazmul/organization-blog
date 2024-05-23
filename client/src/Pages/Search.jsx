@@ -79,8 +79,8 @@ export default function Search() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="p-7 md:min-h-screen bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-none md:w-1/4 lg:w-1/4">
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="p-7 md: bg-gradient-to-r from-[#4c8e40] to-[#81b619] rounded-none md:w-1/4 lg:w-1/4">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex flex-wrap items-center gap-2 w-full">
             <label className="text-white whitespace-nowrap font-semibold">
@@ -114,7 +114,7 @@ export default function Search() {
           </Button>
         </form>
       </div>
-      <div className="flex-1 min-h-screen w-full">
+      <div className="flex-1  w-full">
         <h1 className="text-3xl font-semibold p-3 mt-5 text-center">
           Search results:
         </h1>

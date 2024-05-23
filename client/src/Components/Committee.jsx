@@ -33,6 +33,8 @@ export default function Committee() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    prevArrow: false,
+    nextArrow: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -60,7 +62,7 @@ export default function Committee() {
       <h2 className="text-2xl lg:text-3xl font-semibold font-serif text-center pb-4">
         Executive committee
       </h2>
-      <Slider {...settings}>
+      <Slider {...settings} className="w-10/12 sm:w-11/12 mx-auto">
         {users.map((user) => (
           <div key={user._id}>
             <div className="flex flex-col items-center pb-10">

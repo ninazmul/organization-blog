@@ -20,29 +20,29 @@ export default function UpdatePost() {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
-    const [publishError, setPublishError] = useState(null);
-    const { postId } = useParams();
-    const navigate = useNavigate();
-    
-    useEffect(() => {
-        try {
-            const fetchPost = async () => {
-                const res = await fetch(`/api/post/getposts?postId=${postId}`);
-                const data = await res.json();
-                if (!res.ok) {
-                    setPublishError(data.message);
-                    return;
-                }
-                if (res.ok) {
-                    setPublishError(null);
-                    setFormData(data.posts[0]);
-                }
-            };
-            fetchPost();
-        } catch (error) {
-            console.log(error.message);
+  const [publishError, setPublishError] = useState(null);
+  const { postId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    try {
+      const fetchPost = async () => {
+        const res = await fetch(`/api/post/getposts?postId=${postId}`);
+        const data = await res.json();
+        if (!res.ok) {
+          setPublishError(data.message);
+          return;
         }
-    }, [postId]);
+        if (res.ok) {
+          setPublishError(null);
+          setFormData(data.posts[0]);
+        }
+      };
+      fetchPost();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [postId]);
 
   const handleUploadImage = async () => {
     try {
@@ -109,7 +109,6 @@ export default function UpdatePost() {
       setPublishError("Something went wrong!!!");
     }
   };
-
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">

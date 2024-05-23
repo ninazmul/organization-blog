@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal, Select, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
@@ -271,13 +272,23 @@ export default function DashUsers() {
                         {new Date(user.createdAt).toLocaleDateString()}
                       </Table.Cell>
                       <Table.Cell>
-                        <img
-                          src={user.profilePicture}
-                          alt={user.username}
-                          className="w-10 h-10 object-cover rounded-full bg-gray-500"
-                        />
+                        <Link
+                          to={`/dashboard?tab=userDetails&userId=${user._id}`}
+                        >
+                          <img
+                            src={user.profilePicture}
+                            alt={user.username}
+                            className="w-10 h-10 object-cover rounded-full bg-gray-500"
+                          />
+                        </Link>
                       </Table.Cell>
-                      <Table.Cell>{user.name}</Table.Cell>
+                      <Table.Cell>
+                        <Link
+                          to={`/dashboard?tab=userDetails&userId=${user._id}`}
+                        >
+                          {user.name}
+                        </Link>
+                      </Table.Cell>
                       <Table.Cell>{user.email}</Table.Cell>
                       <Table.Cell>{user.number}</Table.Cell>
                       <Table.Cell>
