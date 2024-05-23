@@ -80,19 +80,13 @@ export const deletepost = async (req, res, next) => {
 };
 
 export const updatepost = async (req, res, next) => {
-  const { postId, userId } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(postId)) {
-    return next(errorHandler(400, "Invalid post ID"));
-  }
-
-  if (!req.user.isAdmin && req.user.id !== userId) {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
     return next(errorHandler(403, "You're not allowed to update this post!"));
   }
 
   try {
     const updatedPost = await Post.findByIdAndUpdate(
-      postId,
+      req.params.postId,
       {
         $set: {
           title: req.body.title,
@@ -101,12 +95,8 @@ export const updatepost = async (req, res, next) => {
           image: req.body.image,
         },
       },
-      { new: true }
+      { new: true } 
     );
-
-    if (!updatedPost) {
-      return next(errorHandler(404, "Post not found"));
-    }
 
     res.status(200).json(updatedPost);
   } catch (error) {
