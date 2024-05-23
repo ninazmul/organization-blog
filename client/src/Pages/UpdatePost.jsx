@@ -25,23 +25,23 @@ export default function UpdatePost() {
     const navigate = useNavigate();
     
     useEffect(() => {
-        try {
-            const fetchPost = async () => {
-                const res = await fetch(`/api/post/getPosts?postId=${postId}`);
-                const data = await res.json();
-                if (!res.ok) {
-                    setPublishError(data.message);
-                    return;
-                }
-                if (res.ok) {
-                    setPublishError(null);
-                    setFormData(data.posts[0]);
-                }
-            };
-            fetchPost();
-        } catch (error) {
-            console.log(error.message);
-        }
+      try {
+        const fetchPost = async () => {
+          const res = await fetch(`/api/post/getPosts?postId=${postId}`);
+          const data = await res.json();
+          if (!res.ok) {
+            setPublishError(data.message);
+            return;
+          }
+          if (res.ok) {
+            setPublishError(null);
+            setFormData(data.posts[0]);
+          }
+        };
+        fetchPost();
+      } catch (error) {
+        console.log(error.message);
+      }
     }, [postId]);
 
   const handleUploadImage = async () => {
@@ -83,13 +83,16 @@ export default function UpdatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "Application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `/api/post/updatepost/${formData._id}/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         setPublishError(data.message);
@@ -103,6 +106,7 @@ export default function UpdatePost() {
       setPublishError("Something went wrong!!!");
     }
   };
+
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
