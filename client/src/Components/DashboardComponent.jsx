@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { HiArrowNarrowUp, HiAnnotation, HiDocumentText } from "react-icons/hi";
 import { Button, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
-
 
 export default function DashboardComponent() {
   const [users, setUsers] = useState([]);
@@ -16,8 +15,8 @@ export default function DashboardComponent() {
   const [lastMonthUsers, setLastMonthUsers] = useState(0);
   const [lastMonthPosts, setLastMonthPosts] = useState(0);
   const [lastMonthComments, setLastMonthComments] = useState(0);
-  const { currentUser } = useSelector(state => state.user);
-  
+  const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -31,10 +30,10 @@ export default function DashboardComponent() {
       } catch (error) {
         console.log(error.message);
       }
-    }
+    };
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/post/getposts?limit=5`);
+        const res = await fetch(`/api/post/getPosts?limit=5`);
         const data = await res.json();
         if (res.ok) {
           setPosts(data.posts);
@@ -44,7 +43,7 @@ export default function DashboardComponent() {
       } catch (error) {
         console.log(error.message);
       }
-    }
+    };
     const fetchComments = async () => {
       try {
         const res = await fetch(`/api/comment/getComments?limit=5`);
@@ -57,7 +56,7 @@ export default function DashboardComponent() {
       } catch (error) {
         console.log(error.message);
       }
-    }
+    };
     if (currentUser.isAdmin) {
       fetchUsers();
       fetchPosts();

@@ -29,7 +29,7 @@ export default function Search() {
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/post/getposts?${urlParams.toString()}&category=event`
+          `/api/post/getPosts?${urlParams.toString()}&category=event`
         );
         if (!res.ok) throw new Error("Failed to fetch posts");
         const data = await res.json();
@@ -67,7 +67,7 @@ export default function Search() {
     urlParams.set("startIndex", numberOfPosts);
     try {
       const res = await fetch(
-        `/api/post/getposts?${urlParams.toString()}&category=event`
+        `/api/post/getPosts?${urlParams.toString()}&category=event`
       );
       if (!res.ok) throw new Error("Failed to fetch more posts");
       const data = await res.json();

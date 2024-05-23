@@ -17,7 +17,7 @@ export default function PostPage() {
     const fetchPost = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
+        const res = await fetch(`/api/post/getPosts?slug=${postSlug}`);
         const data = await res.json();
         if (!res.ok) {
           setError(true);
@@ -38,7 +38,7 @@ export default function PostPage() {
   useEffect(() => {
     const fetchRecentPosts = async () => {
       try {
-        const res = await fetch(`/api/post/getposts?category=event&limit=3`);
+        const res = await fetch(`/api/post/getPosts?category=event&limit=3`);
         const data = await res.json();
         if (res.ok) {
           setRecentPosts(data.posts);
@@ -50,10 +50,7 @@ export default function PostPage() {
     fetchRecentPosts();
   }, []);
 
-  if (loading)
-    return (
-      <Loading/>
-    );
+  if (loading) return <Loading />;
 
   return (
     <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">

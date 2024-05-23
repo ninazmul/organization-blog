@@ -6,12 +6,12 @@ import Banner from "../Components/Banner";
 import Committee from "../Components/Committee";
 
 const Home = () => {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("/api/post/getposts");
+        const res = await fetch("/api/post/getPosts");
         const data = await res.json();
         // Filter posts to show only those in the "event" category
         const eventPosts = data.posts.filter(
