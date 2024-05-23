@@ -27,7 +27,7 @@ export default function UpdatePost() {
   useEffect(() => {
     try {
       const fetchPost = async () => {
-        const res = await fetch(`/api/post/getPost/${postId}`);
+        const res = await fetch(`/api/post/getPosts?postId=${postId}`);
         const data = await res.json();
         if (!res.ok) {
           setPublishError(data.message);
@@ -35,7 +35,7 @@ export default function UpdatePost() {
         }
         if (res.ok) {
           setPublishError(null);
-          setFormData(data.post);
+          setFormData(data.posts[0]);
         }
       };
       fetchPost();
