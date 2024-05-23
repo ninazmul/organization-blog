@@ -80,11 +80,15 @@ export const deletepost = async (req, res, next) => {
 };
 
 export const updatepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    return next(errorHandler(403, "You're not allowed to update this post!"));
-  }
-
   try {
+    if (!req.params.userId || typeof req.params.userId !== "string") {
+      return next(errorHandler(400, "Invalid user ID provided!"));
+    }
+
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+      return next(errorHandler(403, "You're not allowed to update this post!"));
+    }
+
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.postId,
       {
@@ -95,7 +99,7 @@ export const updatepost = async (req, res, next) => {
           image: req.body.image,
         },
       },
-      { new: true } 
+      { new: true }
     );
 
     res.status(200).json(updatedPost);

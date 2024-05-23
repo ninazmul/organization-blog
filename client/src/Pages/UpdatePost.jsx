@@ -83,26 +83,33 @@ export default function UpdatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "Application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const updatedData = {
+        title: formData.title,
+        content: formData.content,
+        category: formData.category,
+        image: formData.image,
+      };
+      const res = await fetch(
+        `/api/post/updatepost/${postId}/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         setPublishError(data.message);
         return;
       }
-      if (res.ok) {
-        setPublishError(null);
-        navigate(`/post/${data.slug}`);
-      }
+      navigate(`/post/${data.slug}`);
     } catch (error) {
       setPublishError("Something went wrong!!!");
     }
   };
+
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
