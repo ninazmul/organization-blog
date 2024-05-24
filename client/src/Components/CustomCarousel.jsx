@@ -86,13 +86,13 @@ const CustomCarousel = ({ items }) => {
       </div>
       <button
         onClick={prevSlide}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white/50 text-2xl md:text-3xl lg:text-4xl p-2"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 opacity-0 text-9xl p-2"
       >
         <FaCircleArrowLeft />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white/50 text-2xl md:text-3xl lg:text-4xl p-2"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 text-9xl p-2"
       >
         <FaCircleArrowRight />
       </button>
