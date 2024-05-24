@@ -41,11 +41,17 @@ const Footers = () => {
                 <Link to="https://www.facebook.com/Prafulla.bd" target="_blank">
                   Facebook
                 </Link>
-                <Link to="" target="_blank">
+                <Link
+                  to="https://www.instagram.com/prafulla_bd"
+                  target="_blank"
+                >
                   Instagram
                 </Link>
-                <Link to="" target="_blank">
-                  YouTube
+                <Link
+                  to="https://x.com/Prafulla_BD"
+                  target="_blank"
+                >
+                  X
                 </Link>
               </Footer.LinkGroup>
             </div>

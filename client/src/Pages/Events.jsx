@@ -20,7 +20,7 @@ const Events = () => {
     fetchPosts();
   }, []);
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen m-4">
       <h1 className="text-2xl lg:text-3xl mt-5 font-semibold font-serif text-center pb-4">
         All Events:
       </h1>

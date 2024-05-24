@@ -110,7 +110,7 @@ const TermsAndConditions = () => {
           <p className="text-justify">
             <strong>Email</strong>: info.prafullabd@gmail.com
             <br />
-            <strong>Phone</strong>: +123-456-7890
+            <strong>Phone</strong>: +8801580845746
             <br />
             <strong>Address</strong>: Kaliakair, Gazipur, Dhaka, Bangladesh.
           </p>

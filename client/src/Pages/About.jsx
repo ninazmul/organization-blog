@@ -202,7 +202,7 @@ const About = () => {
           </p>
           <ul className="list-disc pl-6 space-y-2 text-lg ">
             <li>Email: info.prafullabd@gmail.com</li>
-            <li>Phone: +123-456-7890</li>
+            <li>Phone: +8801580845746</li>
             <li>Address: Kaliakair, Gazipur, Dhaka, Bangladesh.</li>
           </ul>
         </section>
@@ -214,8 +214,10 @@ const About = () => {
           </p>
           <ul className="list-disc pl-6 space-y-2 text-lg ">
             <li>Facebook: https://www.facebook.com/Prafulla.bd</li>
-            <li>Twitter: twitter.com/prafulla</li>
-            <li>Instagram: instagram.com/prafulla</li>
+            <li>
+              Twitter: https://x.com/Prafulla_BD
+            </li>
+            <li>Instagram: https://www.instagram.com/prafulla_bd</li>
           </ul>
         </section>
 
