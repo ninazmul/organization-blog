@@ -71,10 +71,10 @@ export default function Committee() {
                 alt={user.username}
                 className="w-32 h-32 rounded-full border-4 border-lime-700 bg-gray-500"
               />
-              <h5 className="mb-1 text-xl font-medium font-serif text-gray-900 dark:text-white">
+              <h5 className="mb-1 text-xl font-medium font-serif text-gray-900 dark:text-white text-center line-clamp-1">
                 {user.name ? user.name : "Name"}
               </h5>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
+              <span className="text-sm text-gray-500 dark:text-gray-400 text-center line-clamp-1">
                 {user.designation ? user.designation : "Designation"}
               </span>
             </div>
