@@ -57,7 +57,7 @@ const CustomCarousel = ({ items }) => {
 
   return (
     <div
-      className="relative w-full h-56 sm:h-96 object-cover overflow-hidden"
+      className="relative w-full h-56 md:h-72 lg:h-96 object-cover overflow-hidden"
       onMouseEnter={pauseAutoplay}
       onMouseLeave={resumeAutoplay}
     >
@@ -73,8 +73,8 @@ const CustomCarousel = ({ items }) => {
               className="object-cover w-full h-full"
             />
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
-            <div className="absolute z-10 top-1/3 w-full text-center px-4">
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold font-serif text-white">
+            <div className="absolute z-10 top-1/4 sm:top-1/3 w-full text-center px-4">
+              <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold font-serif text-white">
                 {item.title}
               </h1>
               <p className="text-white text-sm md:text-lg lg:text-xl py-2">
