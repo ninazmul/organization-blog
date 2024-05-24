@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Carousel } from "flowbite-react";
+import CustomCarousel from "./CustomCarousel";
 import logo from "../../public/Prafulla-ai.png";
 
 export default function Banner() {
@@ -10,10 +10,10 @@ export default function Banner() {
       try {
         const res = await fetch("/api/post/getPosts");
         const data = await res.json();
-        const bannerPost = data.posts.filter(
+        const bannerPosts = data.posts.filter(
           (post) => post.category === "banner"
         );
-        setPosts(bannerPost);
+        setPosts(bannerPosts);
       } catch (error) {
         console.error("Failed to fetch posts:", error);
       }
@@ -21,49 +21,17 @@ export default function Banner() {
     fetchPosts();
   }, []);
 
+  const defaultBanner = [
+    {
+      image: logo,
+      title: "Welcome to Prafulla",
+      content: "May the world Winsome, Joyful and Blooming!",
+    },
+  ];
+
   return (
     <div>
-      <div className="h-56 md:h-80 lg:h-96 relative">
-        <Carousel pauseOnHover>
-          {posts.length > 0 ? (
-            posts.map((post) => (
-              <div key={post._id} className="relative w-full h-full">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="object-cover w-full h-full"
-                />
-                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
-                <div className="absolute z-10 top-1/3 w-full text-center px-4">
-                  <h1 className="text-2xl sm:text-3xl font-bold lg:text-6xl font-serif text-white">
-                    {post.title}
-                  </h1>
-                  <p className="text-white text-xs md:text-sm lg:text-lg py-1">
-                    {post.content.replace(/<[^>]+>/g, "")}
-                  </p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="relative w-full h-full">
-              <img
-                src={logo}
-                alt="default"
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
-              <div className="absolute z-10 top-1/3 w-full text-center px-4">
-                <h1 className="text-3xl font-bold lg:text-6xl font-serif text-white">
-                  Welcome to Prafulla
-                </h1>
-                <p className="text-white mt-4">
-                  May the world Winsome, Joyful and Blooming!
-                </p>
-              </div>
-            </div>
-          )}
-        </Carousel>
-      </div>
+      <CustomCarousel items={posts.length > 0 ? posts : defaultBanner} />
     </div>
   );
 }
