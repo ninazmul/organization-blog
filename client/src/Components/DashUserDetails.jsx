@@ -95,22 +95,28 @@ export default function DashUserDetails() {
                 <h2 className="text-sm lg:text-xl text-wrap">
                   Facebook:{" "}
                   <span className="font-semibold font-serif text-blue-500">
-                    <Link to={userData.facebook} target="_blank"></Link>
+                    <Link to={userData.facebook} target="_blank">
+                      {userData.facebook}
+                    </Link>
                   </span>
                 </h2>
                 <h2 className="text-sm lg:text-xl text-wrap">
                   LinkedIn:{" "}
                   <span className="font-semibold font-serif text-blue-500">
-                    <Link to={userData.linkedIn} target="_blank"></Link>
+                    <Link to={userData.linkedIn} target="_blank">
+                      {userData.linkedIn}
+                    </Link>
                   </span>
                 </h2>
                 <h2 className="text-sm lg:text-xl text-wrap">
                   Website/Portfolio:{" "}
                   <span className="font-semibold font-serif text-blue-500">
-                    <Link to={userData.website} target="_blank"></Link>
+                    <Link to={userData.website} target="_blank">
+                      {userData.website}
+                    </Link>
                   </span>
                 </h2>
-                <h2 className="text-sm lg:text-xl text-wrap">
+                <h2 className="text-sm lg:text-xl text-wrap text-justify">
                   Thoughts about SDG Goals: <br />
                   <span className="font-semibold font-serif text-justify">
                     {userData.sdg}
