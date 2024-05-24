@@ -35,10 +35,10 @@ export default function Banner() {
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
                 <div className="absolute z-10 top-1/3 w-full text-center px-4">
-                  <h1 className="text-3xl font-bold lg:text-6xl font-serif text-white">
+                  <h1 className="text-2xl sm:text-3xl font-bold lg:text-6xl font-serif text-white">
                     {post.title}
                   </h1>
-                  <p className="text-white mt-4">
+                  <p className="text-white text-xs md:text-sm lg:text-lg py-1">
                     {post.content.replace(/<[^>]+>/g, "")}
                   </p>
                 </div>
