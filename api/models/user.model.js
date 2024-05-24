@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema(
     },
     name: {
       type: String,
-      required: true,
       default: "",
     },
     email: {
@@ -27,27 +26,22 @@ const userSchema = new mongoose.Schema(
     },
     number: {
       type: String,
-      required: true,
       default: "",
     },
     age: {
       type: Number,
-      required: true,
       default: null,
     },
     bloodGroup: {
       type: String,
-      required: true,
       default: "",
     },
     address: {
       type: String,
-      required: true,
       default: "",
     },
     education: {
       type: String,
-      required: true,
       default: "",
     },
     facebook: {
@@ -64,7 +58,6 @@ const userSchema = new mongoose.Schema(
     },
     sdg: {
       type: String,
-      required: true,
       default: "",
     },
     designation: {
