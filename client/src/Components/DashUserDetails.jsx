@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loading from "./Loading";
 
 export default function DashUserDetails() {
@@ -95,24 +95,24 @@ export default function DashUserDetails() {
                 <h2 className="text-sm lg:text-xl text-wrap">
                   Facebook:{" "}
                   <span className="font-semibold font-serif text-blue-500">
-                    {userData.facebook}
+                    <Link to={userData.facebook} target="_blank"></Link>
                   </span>
                 </h2>
                 <h2 className="text-sm lg:text-xl text-wrap">
                   LinkedIn:{" "}
                   <span className="font-semibold font-serif text-blue-500">
-                    {userData.linkedIn}
+                    <Link to={userData.linkedIn} target="_blank"></Link>
                   </span>
                 </h2>
                 <h2 className="text-sm lg:text-xl text-wrap">
                   Website/Portfolio:{" "}
                   <span className="font-semibold font-serif text-blue-500">
-                    {userData.website}
+                    <Link to={userData.website} target="_blank"></Link>
                   </span>
                 </h2>
                 <h2 className="text-sm lg:text-xl text-wrap">
-                  Thoughts about SDG Goals:
-                  <span className="font-semibold font-serif">
+                  Thoughts about SDG Goals: <br />
+                  <span className="font-semibold font-serif text-justify">
                     {userData.sdg}
                   </span>
                 </h2>

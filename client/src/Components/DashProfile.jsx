@@ -290,8 +290,12 @@ export default function DashProfile() {
           onChange={handleSelectChange}
         >
           <option value="">Select Education Level</option>
-          <option value="High School">Secondary School Certificate</option>
-          <option value="Associate Degree">Higher Secondary Certificate</option>
+          <option value="Secondary School Certificate">
+            Secondary School Certificate
+          </option>
+          <option value="Higher Secondary Certificate">
+            Higher Secondary Certificate
+          </option>
           <option value="Bachelor's Degree">Bachelor's Degree</option>
           <option value="Master's Degree">Master's Degree</option>
           <option value="Doctorate">Doctorate</option>
