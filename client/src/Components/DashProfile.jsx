@@ -51,6 +51,7 @@ export default function DashProfile() {
       setImageFileUrl(URL.createObjectURL(file));
     }
   };
+
   useEffect(() => {
     if (imageFile) {
       uploadImage();
@@ -102,14 +103,35 @@ export default function DashProfile() {
     e.preventDefault();
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
-    if (Object.keys(formData).length === 0) {
-      setUpdateUserError("No changes made");
+
+    const requiredFields = [
+      "name",
+      "number",
+      "age",
+      "bloodGroup",
+      "address",
+      "education",
+      "facebook",
+      "sdg",
+    ];
+
+    for (const field of requiredFields) {
+      if (!formData[field] && !currentUser[field]) {
+        setUpdateUserError("Please fill in all required fields.");
+        return;
+      }
+    }
+
+    if (!imageFileUrl && !currentUser.profilePicture) {
+      setUpdateUserError("Please upload a profile picture.");
       return;
     }
+
     if (imageFileUploading) {
-      setUpdateUserError("Please wait for image to upload");
+      setUpdateUserError("Please wait for the image to upload.");
       return;
     }
+
     try {
       dispatch(updateStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
@@ -245,6 +267,7 @@ export default function DashProfile() {
           placeholder="Your Name"
           defaultValue={currentUser.name}
           onChange={handleChange}
+          required
         />
         <TextInput
           type="number"
@@ -252,6 +275,7 @@ export default function DashProfile() {
           placeholder="Phone Number"
           defaultValue={currentUser.number}
           onChange={handleChange}
+          required
         />
         <div className="flex flex-wrap gap-4 justify-between">
           <TextInput
@@ -260,11 +284,13 @@ export default function DashProfile() {
             placeholder="Age"
             defaultValue={currentUser.age}
             onChange={handleChange}
+            required
           />
           <Select
             id="bloodGroup"
-            value={currentUser.bloodGroup}
+            value={formData.bloodGroup || currentUser.bloodGroup || ""}
             onChange={handleSelectChange}
+            required
           >
             <option value="">Select Blood Group</option>
             <option value="A+">A+</option>
@@ -283,11 +309,13 @@ export default function DashProfile() {
           placeholder="Address"
           defaultValue={currentUser.address}
           onChange={handleChange}
+          required
         />
         <Select
           id="education"
-          value={currentUser.education}
+          value={formData.education || currentUser.education || ""}
           onChange={handleSelectChange}
+          required
         >
           <option value="">Select Education Level</option>
           <option value="Secondary School Certificate">
@@ -306,6 +334,7 @@ export default function DashProfile() {
           placeholder="Facebook Profile URL"
           defaultValue={currentUser.facebook}
           onChange={handleChange}
+          required
         />
         <TextInput
           type="text"
@@ -328,6 +357,7 @@ export default function DashProfile() {
           rows="3"
           defaultValue={currentUser.sdg}
           onChange={handleChange}
+          required
         />
         <Button
           outline

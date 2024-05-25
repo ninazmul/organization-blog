@@ -20,29 +20,31 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/sign-in" element={<Signin />} />
-        <Route path="/sign-up" element={<Signup />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/post/:postSlug" element={<PostPage />} />
-        <Route path="/termsAndConditions" element={<TermsAndConditions />} />
-        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-        <Route element={<PrivetRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-        <Route element={<AdminPrivateRoute />}>
-          <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/update-post/:postId" element={<UpdatePost />} />
-        </Route>
-      </Routes>
-      <Footers />
-    </BrowserRouter>
+    <div className="max-w-7xl mx-auto">
+      <BrowserRouter>
+        <ScrollToTop />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/sign-in" element={<Signin />} />
+          <Route path="/sign-up" element={<Signup />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/post/:postSlug" element={<PostPage />} />
+          <Route path="/termsAndConditions" element={<TermsAndConditions />} />
+          <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+          <Route element={<PrivetRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route element={<AdminPrivateRoute />}>
+            <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/update-post/:postId" element={<UpdatePost />} />
+          </Route>
+        </Routes>
+        <Footers />
+      </BrowserRouter>
+    </div>
   );
 }
 
