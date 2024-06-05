@@ -8,6 +8,8 @@ import { toggleTheme } from "../redux/theme/themeSlice";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { signOutSuccess } from "../redux/user/userSlice";
 import { AiOutlineSearch } from "react-icons/ai";
+import { HiBadgeCheck } from "react-icons/hi";
+
 
 
 const Header = () => {
@@ -102,7 +104,18 @@ const Header = () => {
               arrowIcon={false}
               inline
               label={
-                <Avatar alt="user" img={currentUser.profilePicture} rounded />
+                currentUser.isVolunteer ? (
+                  <div className="relative">
+                    <Avatar
+                      alt="user"
+                      img={currentUser.profilePicture}
+                      rounded
+                    />
+                    <HiBadgeCheck className="absolute bottom-[-10%] right-[-10%] text-blue-500 text-xl" />
+                  </div>
+                ) : (
+                  <Avatar alt="user" img={currentUser.profilePicture} rounded />
+                )
               }
             >
               <Dropdown.Header>
@@ -113,11 +126,7 @@ const Header = () => {
               </Dropdown.Header>
               {currentUser.isAdmin && (
                 <Link to="/dashboard?tab=dash">
-                  <Dropdown.Item
-                    as="div"
-                  >
-                    Dashboard
-                  </Dropdown.Item>
+                  <Dropdown.Item as="div">Dashboard</Dropdown.Item>
                 </Link>
               )}
               <Link to={"/dashboard?tab=profile"}>
@@ -152,7 +161,6 @@ const Header = () => {
         )}
 
         <Navbar.Toggle />
-        
       </div>
       <Navbar.Collapse>{navBtn}</Navbar.Collapse>
     </Navbar>

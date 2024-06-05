@@ -28,6 +28,7 @@ import {
 } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { HiBadgeCheck } from "react-icons/hi";
 
 export default function DashProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
@@ -238,6 +239,12 @@ export default function DashProfile() {
         {imageFileUploadError && (
           <Alert color="failure">{imageFileUploadError}</Alert>
         )}
+        <div className="flex items-center gap-1 justify-center">
+          <h1 className="text-xl font-serif font-semibold text-center">
+            {currentUser.name && currentUser.name}
+          </h1>
+          <HiBadgeCheck className="text-xl text-blue-500"/>
+        </div>
         <TextInput
           type="text"
           id="username"
